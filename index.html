@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fix Appointment</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <!-- SMTP JS -->
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+  </head>
+  <body style="zoom: 200%">
+    <div class="main">
+      <input type="checkbox" id="chk" aria-hidden="true" />
+
+      <div class="signup">
+        <form id="appointmentForm">
+          <h3
+            style="text-align: center; color: white; font-size: 26px"
+            aria-hidden="true">
+            Fix Appointment
+          </h3>
+          <input
+            id="name"
+            type="text"
+            name="name"
+            placeholder="Name"
+            required />
+          <input id="date" type="text" name="date" placeholder="Date" />
+          <input
+            id="email"
+            type="email"
+            name="email"
+            placeholder="Email"
+            required />
+          <input
+            id="mobile"
+            type="tel"
+            name="mobile"
+            placeholder="Mobile Num" />
+          <textarea
+            id="desc"
+            name="description"
+            placeholder="Description"
+            style="height: 40px"
+            required></textarea>
+          <button onclick="sendEmail(event)" type="button">Submit</button>
+        </form>
+      </div>
+    </div>
+    <script defer>
+      const name = document.getElementById('name')
+      const date = document.getElementById('date')
+      const desc = document.getElementById('desc')
+      const email = document.getElementById('email')
+      const mobile = document.getElementById('mobile')
+
+      function resetValues() {
+        name.value = ''
+        date.value = ''
+        desc.value = ''
+        email.value = ''
+        mobile.value = ''
+      }
+
+      function sendEmail(e) {
+        e.preventDefault()
+
+        const payload =
+          '<br>Name: ' +
+          name.value +
+          '<br>Date: ' +
+          date.value +
+          '<br>Desc: ' +
+          desc.value +
+          '<br>Mobile: ' +
+          mobile.value
+
+        Email.send({
+          SecureToken: '62959713-7837-49e5-b6e8-16c82e372fba',
+          To: 'drabfitst@gmail.com',
+          From: 'drabfitst@gmail.com',
+          Subject: `${email.value} send you appointment`,
+          Body: payload,
+        }).then((message) => alert(message + ' Email was sent successfuly'))
+        resetValues()
+      }
+    </script>
+  </body>
+</html>
